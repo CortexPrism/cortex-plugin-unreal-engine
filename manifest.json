@@ -1,0 +1,166 @@
+{
+  "name": "cortex-plugin-unreal-engine",
+  "version": "1.0.0",
+  "description": "Unreal Engine 5 Development Agent — control the UE5 editor with 238+ commands for materials, blueprints, VFX, level design, lighting, and performance profiling. Game developers describe what they want and the agent drives UE5 directly.",
+  "kind": "esm",
+  "entryPoint": "mod.ts",
+  "runtime": "deno",
+  "author": "CortexPrism",
+  "license": "MIT",
+  "repository": "https://github.com/CortexPrism/cortex-plugin-unreal-engine",
+  "homepage": "https://cortexprism.io/marketplace/plugins/unreal-engine",
+  "capabilities": ["tools", "network:fetch"],
+  "tools": [
+    {
+      "name": "ue5_create_material",
+      "description": "Create a new material with specified properties: base color, metallic, roughness, normal map, emissive",
+      "params": [
+        { "name": "name", "type": "string", "description": "Material name", "required": true },
+        {
+          "name": "base_color",
+          "type": "string",
+          "description": "Base color (hex or named)",
+          "required": false
+        },
+        {
+          "name": "metallic",
+          "type": "number",
+          "description": "Metallic value 0-1",
+          "required": false
+        },
+        {
+          "name": "roughness",
+          "type": "number",
+          "description": "Roughness value 0-1",
+          "required": false
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "Natural language description of desired material look",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "ue5_create_blueprint",
+      "description": "Create a new Blueprint class with specified parent class and components",
+      "params": [
+        { "name": "name", "type": "string", "description": "Blueprint name", "required": true },
+        {
+          "name": "parent_class",
+          "type": "string",
+          "description": "Parent class",
+          "required": true,
+          "enum": ["Actor", "Pawn", "Character", "GameMode", "PlayerController", "UserWidget"]
+        },
+        {
+          "name": "components",
+          "type": "string",
+          "description": "JSON array of components to add",
+          "required": false
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "What this blueprint should do",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "ue5_modify_level",
+      "description": "Modify the current level: place actors, adjust lighting, modify terrain, set post-processing",
+      "params": [
+        {
+          "name": "action",
+          "type": "string",
+          "description": "Action to perform",
+          "required": true,
+          "enum": [
+            "place_actor",
+            "set_lighting",
+            "modify_terrain",
+            "set_post_process",
+            "create_landscape"
+          ]
+        },
+        {
+          "name": "actor_type",
+          "type": "string",
+          "description": "Actor/asset type to place or modify",
+          "required": false
+        },
+        {
+          "name": "location",
+          "type": "string",
+          "description": "JSON {x, y, z} position",
+          "required": false
+        },
+        {
+          "name": "parameters",
+          "type": "string",
+          "description": "JSON parameters specific to the action",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "ue5_profile_performance",
+      "description": "Profile rendering performance, identify GPU/CPU bottlenecks, and suggest optimizations",
+      "params": [
+        {
+          "name": "scope",
+          "type": "string",
+          "description": "Profiling scope",
+          "required": false,
+          "enum": ["full", "gpu", "cpu", "memory", "draw_calls"]
+        },
+        {
+          "name": "duration_seconds",
+          "type": "number",
+          "description": "Profiling duration (default: 5)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "ue5_get_scene_info",
+      "description": "Get information about the current scene: actors present, materials used, lighting setup, and world settings",
+      "params": []
+    }
+  ],
+  "dependencies": {},
+  "peerDependencies": { "cortex": ">=1.0.0" },
+  "ui": {
+    "settings": [
+      {
+        "section": "Connection",
+        "fields": [
+          {
+            "key": "ue5Host",
+            "label": "UE5 Remote Control Host",
+            "type": "text",
+            "defaultValue": "localhost"
+          },
+          {
+            "key": "ue5Port",
+            "label": "UE5 Remote Control Port",
+            "type": "number",
+            "defaultValue": 30010
+          },
+          {
+            "key": "autoConnect",
+            "label": "Auto-connect on load",
+            "type": "boolean",
+            "defaultValue": true
+          }
+        ]
+      }
+    ]
+  },
+  "aiDisclosure": {
+    "tools": ["Kilo (DeepSeek) — scaffold and implementation"],
+    "humanReview": true
+  }
+}
