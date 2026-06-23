@@ -1,7 +1,7 @@
 {
   "name": "cortex-plugin-unreal-engine",
-  "version": "1.0.0",
-  "description": "Unreal Engine 5 Development Agent — control the UE5 editor with 238+ commands for materials, blueprints, VFX, level design, lighting, and performance profiling. Game developers describe what they want and the agent drives UE5 directly.",
+  "version": "1.0.1",
+  "description": "Unreal Engine 5 Development Agent \u2014 control the UE5 editor with 238+ commands for materials, blueprints, VFX, level design, lighting, and performance profiling. Game developers describe what they want and the agent drives UE5 directly.",
   "kind": "esm",
   "entryPoint": "mod.ts",
   "runtime": "deno",
@@ -9,13 +9,21 @@
   "license": "MIT",
   "repository": "https://github.com/CortexPrism/cortex-plugin-unreal-engine",
   "homepage": "https://cortexprism.io/marketplace/plugins/unreal-engine",
-  "capabilities": ["tools", "network:fetch"],
+  "capabilities": [
+    "tools",
+    "network:fetch"
+  ],
   "tools": [
     {
       "name": "ue5_create_material",
       "description": "Create a new material with specified properties: base color, metallic, roughness, normal map, emissive",
       "params": [
-        { "name": "name", "type": "string", "description": "Material name", "required": true },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Material name",
+          "required": true
+        },
         {
           "name": "base_color",
           "type": "string",
@@ -46,13 +54,25 @@
       "name": "ue5_create_blueprint",
       "description": "Create a new Blueprint class with specified parent class and components",
       "params": [
-        { "name": "name", "type": "string", "description": "Blueprint name", "required": true },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Blueprint name",
+          "required": true
+        },
         {
           "name": "parent_class",
           "type": "string",
           "description": "Parent class",
           "required": true,
-          "enum": ["Actor", "Pawn", "Character", "GameMode", "PlayerController", "UserWidget"]
+          "enum": [
+            "Actor",
+            "Pawn",
+            "Character",
+            "GameMode",
+            "PlayerController",
+            "UserWidget"
+          ]
         },
         {
           "name": "components",
@@ -114,7 +134,13 @@
           "type": "string",
           "description": "Profiling scope",
           "required": false,
-          "enum": ["full", "gpu", "cpu", "memory", "draw_calls"]
+          "enum": [
+            "full",
+            "gpu",
+            "cpu",
+            "memory",
+            "draw_calls"
+          ]
         },
         {
           "name": "duration_seconds",
@@ -131,7 +157,9 @@
     }
   ],
   "dependencies": {},
-  "peerDependencies": { "cortex": ">=1.0.0" },
+  "peerDependencies": {
+    "cortex": ">=0.51.0"
+  },
   "ui": {
     "settings": [
       {
@@ -160,7 +188,9 @@
     ]
   },
   "aiDisclosure": {
-    "tools": ["Kilo (DeepSeek) — scaffold and implementation"],
+    "tools": [
+      "Kilo (DeepSeek) \u2014 scaffold and implementation"
+    ],
     "humanReview": true
   }
 }
